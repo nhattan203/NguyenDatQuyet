@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>🎉Nguyên Đạt Quyết 🎂</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap');
+  body {
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    background: linear-gradient(120deg, #ff9a9e, #fad0c4, #a18cd1, #fbc2eb, #a1c4fd, #c2ffd8);
+    background-size: 1200% 1200%;
+    animation: gradientShift 18s ease infinite;
+    color: white;
+  }
+  @keyframes gradientShift {
+    0% {background-position: 0% 50%;}
+    50% {background-position: 100% 50%;}
+    100% {background-position: 0% 50%;}
+  }
+  .glass {
+    background: rgba(255, 255, 255, 0.18);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 1rem 1.5rem;
+    display: inline-block;
+  }
+  .page {display: none; opacity: 0; transform: translateY(18px) scale(.98); transition: opacity .9s, transform .9s;}
+  .page.active {display: block; opacity: 1; transform: none;}
+  .typewriter {
+    display: inline-block;
+    white-space: pre-wrap;
+    border-right: 3px solid rgba(255, 255, 255, .7);
+    animation: caret .8s steps(1) infinite;
+    text-shadow: 0 0 8px rgba(0,0,0,.7);
+  }
+  @keyframes caret { 50% {border-color: transparent;} }
+  .btn {
+    transition: .2s;
+    box-shadow: 0 4px 15px rgba(0,0,0,.2);
+  }
+  .btn:hover {transform: translateY(-2px) scale(1.03);}
+  .confetti {position: fixed; top: -10vh; width: 10px; height: 14px; opacity: .95; pointer-events: none; animation: confettiFall linear forwards;}
+  @keyframes confettiFall {to {transform: translateY(110vh) rotate(720deg);} }
+  #fx-canvas {position: fixed; inset: 0; pointer-events: none; display: none;}
+  .particle {position: fixed; bottom: -10vh; border-radius: 50%; opacity: .85; animation: floatUp linear infinite;}
+  @keyframes floatUp {from {transform: translateY(0)} to {transform: translateY(-120vh)}}
+
+  /* Trang 2 cuộn được */
+  #page-2 {overflow-y: auto; padding-bottom: 2rem;}
+</style>
+</head>
+<body>
+
+<div id="particles"></div>
+<canvas id="fx-canvas"></canvas>
+
+<main class="relative z-10 text-center p-6 md:p-10 space-y-8">
+  <!-- Trang 1 -->
+  <section id="page-1" class="page active">
+    <div class="glass">
+      <h1 class="text-4xl md:text-6xl font-extrabold">Một món quà đặc biệt cho <br/>Nguyên Đạt Quyết ✨</h1>
+      <p class="mt-5 text-lg md:text-xl">Sẵn sàng khám phá điều bất ngờ chưa? 😎</p>
+    </div>
+    <div class="mt-8">
+      <button data-target="2" class="nav btn glass text-white font-bold py-3 px-8 rounded-full">Mở Quà Ngay 🎁</button>
+    </div>
+  </section>
+
+  <!-- Trang 2 -->
+  <section id="page-2" class="page">
+    <div class="glass">
+      <h2 class="text-3xl font-extrabold">Ký ức rực rỡ 📸</h2>
+    </div>
+    <div class="grid grid-cols-2 md:grid-cols-6 gap-4 md:gap-6 mt-6">
+      <img src="anh1.jpg" class="rounded-lg shadow-lg">
+      <img src="anh2.jpg" class="rounded-lg shadow-lg">
+      <img src="anh3.jpg" class="rounded-lg shadow-lg">
+      <img src="anh4.jpg" class="rounded-lg shadow-lg">
+      <img src="anh5.jpg" class="rounded-lg shadow-lg">
+      <img src="anh6.jpg" class="rounded-lg shadow-lg">
+    </div>
+    <div class="flex gap-3 justify-center mt-8">
+      <button data-target="1" class="nav btn glass text-white font-semibold py-3 px-7 rounded-full">⬅ Quay lại</button>
+      <button data-target="3" class="nav btn glass text-white font-semibold py-3 px-7 rounded-full">Đi tới lời chúc ➡</button>
+    </div>
+  </section>
+
+  <!-- Trang 3 -->
+  <section id="page-3" class="page">
+    <div class="glass">
+      <h2 class="text-3xl font-extrabold">Gửi đến cậu bạn cực phẩm 🌟</h2>
+    </div>
+    <p id="tw" class="typewriter text-xl font-bold mt-4"></p>
+    <p class="mt-6">Chúng ta đã là bạn suốt <span id="years" class="font-bold">0</span> năm.</p>
+    <div class="flex gap-3 justify-center mt-8">
+      <button data-target="2" class="nav btn glass text-white font-semibold py-3 px-7 rounded-full">⬅ Quay lại</button>
+      <button data-target="4" class="nav btn glass text-white font-semibold py-3 px-7 rounded-full">Thổi nến 🎂</button>
+    </div>
+  </section>
+
+  <!-- Trang 4 -->
+  <section id="page-4" class="page">
+    <div class="glass">
+      <h2 class="text-3xl font-extrabold">Ước đi nào! 🕯✨</h2>
+    </div>
+    <div class="mx-auto max-w-sm mt-4">
+      <img id="cake" src="cake.gif" class="rounded-2xl shadow-xl w-full cursor-pointer">
+    </div>
+    <p class="mt-5 glass">Chạm vào bánh để bắn pháo hoa, tung pháo giấy & lưu kỷ niệm 🎇🎊</p>
+    <div class="flex gap-3 justify-center mt-8">
+      <button data-target="3" class="nav btn glass text-white font-semibold py-3 px-7 rounded-full">⬅ Quay lại</button>
+      <button data-target="1" class="nav btn glass text-white font-semibold py-3 px-7 rounded-full">Xem lại từ đầu 🔄</button>
+    </div>
+  </section>
+</main>
+
+<script>
+/* Navigation */
+const pages = document.querySelectorAll('.page');
+const navs = document.querySelectorAll('.nav');
+let current = 1, isMusic = false, synth = null;
+navs.forEach(b => b.onclick = () => showPage(+b.dataset.target));
+
+function showPage(i) {
+  pages.forEach(p => p.classList.remove('active'));
+  document.getElementById(`page-${i}`).classList.add('active');
+  current = i;
+  if (i === 3) { typewriter(); years(); }
+  if (i === 4) { startFW(); playMusic(); confetti(150); }
+}
+
+/* Typewriter */
+const longMsg = "Chúc mày tuổi mới rực rỡ như pháo hoa 🎆, hạnh phúc như trúng số 💰, bình yên như buổi sáng cuối tuần ☀️. Cảm ơn vì mày đã luôn là một phần thanh xuân tươi đẹp của tao 🌸. Hy vọng những ngày tới mày sẽ cười thật nhiều 😄, ăn ngon ngủ ngon 🥗🛏, và gặt hái nhiều thành công trên con đường mày chọn 🚀. Tuổi mới, hãy sống hết mình, yêu hết lòng và vui hết cỡ nhé! 💖";
+function typewriter() {
+  let el = document.getElementById('tw');
+  el.textContent = '';
+  let i = 0;
+  let timer = setInterval(() => {
+    el.textContent += longMsg.charAt(i++);
+    if (i >= longMsg.length) clearInterval(timer);
+  }, 30);
+}
+function years() {
+  let y = 0, el = document.getElementById('years');
+  let timer = setInterval(() => {
+    el.textContent = ++y;
+    if (y >= 10) clearInterval(timer);
+  }, 70);
+}
+
+/* Confetti */
+function confetti(count) {
+  for (let i = 0; i < count; i++) {
+    let c = document.createElement('div');
+    c.className = 'confetti';
+    c.style.left = Math.random() * 100 + 'vw';
+    c.style.background = `hsl(${Math.random()*360}, 70%, 60%)`;
+    c.style.animationDuration = 2 + Math.random() * 3 + 's';
+    document.body.appendChild(c);
+    setTimeout(() => c.remove(), 5000);
+  }
+}
+
+/* Fireworks Canvas */
+const canvas = document.getElementById('fx-canvas');
+const ctx = canvas.getContext('2d');
+let fwParticles = [];
+function startFW() {
+  canvas.style.display = 'block';
+  resizeCanvas();
+  requestAnimationFrame(updateFW);
+}
+function stopFW() {
+  canvas.style.display = 'none';
+  fwParticles = [];
+}
+function resizeCanvas() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+window.addEventListener('resize', resizeCanvas);
+
+function spawnFirework(x, y) {
+  let colors = ['#ff2d2d', '#fffb00', '#00ff90', '#00cfff', '#ff00d4'];
+  for (let i = 0; i < 50; i++) {
+    fwParticles.push({
+      x, y,
+      color: colors[Math.floor(Math.random()*colors.length)],
+      radius: 2 + Math.random()*2,
+      angle: Math.random()*2*Math.PI,
+      speed: 2 + Math.random()*3,
+      life: 60
+    });
+  }
+}
+function updateFW() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  fwParticles.forEach((p, i) => {
+    p.x += Math.cos(p.angle) * p.speed;
+    p.y += Math.sin(p.angle) * p.speed;
+    p.life--;
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.radius, 0, 2*Math.PI);
+    ctx.fillStyle = p.color;
+    ctx.fill();
+    if (p.life <= 0) fwParticles.splice(i, 1);
+  });
+  requestAnimationFrame(updateFW);
+}
+document.getElementById('cake').onclick = () => {
+  spawnFirework(window.innerWidth/2, window.innerHeight/2);
+  confetti(100);
+};
+
+/* Music */
+function playMusic() {
+  if (!isMusic) {
+    isMusic = true;
+    synth = new Tone.Synth().toDestination();
+    Tone.start();
+    const now = Tone.now();
+    const notes = ['C4','C4','D4','C4','F4','E4','C4','C4','D4','C4','G4','F4'];
+    notes.forEach((n, idx) => synth.triggerAttackRelease(n, '8n', now + idx * 0.5));
+  }
+}
+</script>
+</body>
+</html>
